@@ -1,9 +1,32 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import Nav from '../components/Nav';
 
-export default () => <Title>My page</Title>
+function Index() {
+    const [name, setName] = useState('');
+
+    const handleSubmit = e => {
+        e.preventDefault();
+    };
+
+    return (
+        <>
+            <Nav />
+            <form>
+                <input type="text" onChange={e => setName(e.target.value)} />
+                <button onClick={handleSubmit}>Get</button>
+            </form>
+        </>
+    );
+}
+
+const mapState = state => {
+    userName: state.userName;
+};
+
+const mapDispatch = dispatch => {
+    setName: userName => dispatch.userName.setName(userName);
+};
+
+export default Index;
