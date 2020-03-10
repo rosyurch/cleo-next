@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import Nav from '../components/Nav';
 
-function Index() {
-    const [name, setName] = useState('');
-
+function Index(props) {
     const handleSubmit = e => {
         e.preventDefault();
     };
@@ -14,19 +12,19 @@ function Index() {
         <>
             <Nav />
             <form>
-                <input type="text" onChange={e => setName(e.target.value)} />
+                <input type="text" onChange={e => props.setName(e.target.value)} />
                 <button onClick={handleSubmit}>Get</button>
             </form>
         </>
     );
 }
 
-const mapState = state => {
-    userName: state.userName;
-};
+const mapState = state => ({
+    userName: state.userName,
+});
 
-const mapDispatch = dispatch => {
-    setName: userName => dispatch.userName.setName(userName);
-};
+const mapDispatch = dispatch => ({
+    setName: userName => dispatch.userName.setName(userName),
+});
 
-export default Index;
+export default connect(mapState, mapDispatch)(Index);

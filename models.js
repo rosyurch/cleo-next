@@ -1,7 +1,7 @@
 export const userName = {
     state: '',
     reducers: {
-        setName(payload) {
+        setName(state, payload) {
             return payload;
         },
     },
@@ -17,9 +17,7 @@ export const userProfile = {
     effects: {
         effects: dispatch => ({
             async setUsername(payload, rootState) {
-                const responce = await fetch(
-                    `https://api.github.com/users/${payload}`
-                );
+                const responce = await fetch(`https://api.github.com/users/${payload}`);
                 const data = responce.json();
                 dispatch.userProfile.setProfile(data);
             },
