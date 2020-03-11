@@ -7,10 +7,10 @@ const Nav = styled.nav`
     color: ${({ theme }) => theme.colors.primary};
     display: flex;
     justify-content: space-around;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
 `;
 
 const A = styled.a`
-    color: lightblue;
     cursor: pointer;
 `;
 
