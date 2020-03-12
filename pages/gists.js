@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Nav from '../components/Nav';
-import Gist from '../components/Gist'
+import Gist from '../components/Gist';
 
 function Gists({ userName, userGists, setGists }) {
     useEffect(() => {
@@ -13,7 +13,11 @@ function Gists({ userName, userGists, setGists }) {
         <>
             <Nav />
             <ul>
-            {userGists.map(g => <li> <Gist data={g}/> </li>)}
+                {userGists.map(g => (
+                    <li key={g.id}>
+                        <Gist data={g} />
+                    </li>
+                ))}
             </ul>
         </>
     );

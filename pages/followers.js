@@ -8,7 +8,7 @@ function Followers({ userName, userFollowers, setFollowers }) {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        if (!userFollowers && userName) setFollowers(userName);
+        if (!userFollowers.length && userName) setFollowers(userName);
     }, []); // DON"T FORGET THAT [] !!!!!
 
     return (
