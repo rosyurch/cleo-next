@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 import Follower from '../components/Follower';
 
 function Followers({ userName, userFollowers, setFollowers }) {

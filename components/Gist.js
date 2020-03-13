@@ -5,8 +5,8 @@ function Gist({ data }) {
         <div>
             <ul>
                 Files:{' '}
-                {Object.entries(data.files).map(keyAndVal => (
-                    <li key={keyAndVal[1].filename}>{keyAndVal[1].filename}</li>
+                {Object.keys(data.files).map(fileName => (
+                    <li key={fileName}>{fileName}</li>
                 ))}
             </ul>
             <a href={data.url}>Gist Link</a>

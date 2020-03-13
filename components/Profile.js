@@ -1,10 +1,12 @@
 import React from 'react';
+import Flex from '../components/Flex';
+import Div from '../components/Div';
 
 function Profile({ data }) {
     return (
-        <div>
+        <Flex flexWrap="wrap">
             <img src={data.avatar_url} width="200" height="200" />
-            <div>
+            <Div width={400} pl={20}>
                 <h1>{data.name}</h1>
                 <div>Login: {data.login}</div>
                 {data.location && <div>Location: {data.location}</div>}
@@ -12,14 +14,14 @@ function Profile({ data }) {
                 {data.email && <div>Message: {data.email}</div>}
 
                 {data.followers ? <div>Followers: {data.followers}</div> : ''}
-                {/* 0 is rendered by react */}
+                {/* `0 && smth` is rendered by react */}
                 {data.following ? <div>Following: {data.following}</div> : ''}
 
                 {data.public_repos ? <div>Repos: {data.public_repos}</div> : ''}
                 {data.public_gists ? <div>Gists: {data.public_gists}</div> : ''}
                 <a href={data.url}>Link</a>
-            </div>
-        </div>
+            </Div>
+        </Flex>
     );
 }
 

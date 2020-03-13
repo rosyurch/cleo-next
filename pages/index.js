@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Profile from '../components/Profile';
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
+import Form from '../components/Form';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 let defaultProfile = '';
 if (typeof window !== 'undefined') {
@@ -32,10 +35,12 @@ function Index({ setProfile, userProfile }) {
     return (
         <>
             <Nav />
-            <form>
-                <input type="text" value={name} onChange={e => setName(e.target.value)} />
-                <button onClick={handleSubmit}>Get</button>
-            </form>
+            <Form>
+                <Input border="none" p={10} type="text" value={name} onChange={e => setName(e.target.value)} />
+                <Button border="none" borderLeft="1px solid #000" p={10} onClick={handleSubmit}>
+                    Get
+                </Button>
+            </Form>
             {userProfile.id && <Profile data={userProfile} />}
         </>
     );

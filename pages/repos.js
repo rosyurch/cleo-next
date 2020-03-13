@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../components/Nav';
+import Nav from '../components/Nav/Nav';
 import Repo from '../components/Repo';
 
 function Repos({ userName, userRepos, setUserRepos }) {
