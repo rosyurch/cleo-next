@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import Nav from './StyledNav';
-import A from './A';
+
+import Nav from './NavStyles';
+import A from '../generic/A';
 
 export default () => (
     <Nav>

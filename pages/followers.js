@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import Nav from '../components/Nav/Nav';
 import Follower from '../components/Follower';
+import Form from '../components/generic/Form';
+import Input from '../components/generic/Input';
+import Ul from '../components/generic/Ul';
 
 function Followers({ userName, userFollowers, setFollowers }) {
     const [query, setQuery] = useState('');
@@ -14,8 +17,12 @@ function Followers({ userName, userFollowers, setFollowers }) {
     return (
         <>
             <Nav />
-            <input type="text" aria-label="search" onChange={e => setQuery(e.target.value.toLowerCase())} />
-            <ul>
+
+            <Form>
+                <Input type="text" aria-label="search" onChange={e => setQuery(e.target.value.toLowerCase())} />
+            </Form>
+
+            <Ul display="flex" flexWrap="wrap">
                 {userFollowers
                     .filter(f => f.login.toLowerCase().includes(query))
                     .map(f => (
@@ -23,7 +30,7 @@ function Followers({ userName, userFollowers, setFollowers }) {
                             <Follower data={f} />
                         </li>
                     ))}
-            </ul>
+            </Ul>
         </>
     );
 }

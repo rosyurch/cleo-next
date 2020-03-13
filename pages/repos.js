@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import Nav from '../components/Nav/Nav';
 import Repo from '../components/Repo';
+import Form from '../components/generic/Form';
+import Input from '../components/generic/Input';
+import Ul from '../components/generic/Ul';
+import Flex from '../components/generic/Flex';
 
 function Repos({ userName, userRepos, setUserRepos }) {
     const [sortByStars, setSortByStars] = useState(false);
@@ -19,13 +23,18 @@ function Repos({ userName, userRepos, setUserRepos }) {
     return (
         <>
             <Nav />
-            <label>
-                Sort by stars:
-                <input type="checkbox" onChange={() => setSortByStars(s => !s)} />
-            </label>
-            <input type="text" aria-label="search" onChange={e => setQuery(e.target.value.toLowerCase())} />
 
-            <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Form>
+                <Flex flexDirection="column" alignItems="center">
+                    <Input type="text" aria-label="search" onChange={e => setQuery(e.target.value.toLowerCase())} />
+                    <label>
+                        Sort by stars:
+                        <input type="checkbox" onChange={() => setSortByStars(s => !s)} />
+                    </label>
+                </Flex>
+            </Form>
+
+            <Ul display="flex" flexWrap="wrap">
                 {(sortByStars ? sortedList : userRepos)
                     .filter(
                         r =>
@@ -38,7 +47,7 @@ function Repos({ userName, userRepos, setUserRepos }) {
                             <Repo data={r} />
                         </li>
                     ))}
-            </ul>
+            </Ul>
         </>
     );
 }

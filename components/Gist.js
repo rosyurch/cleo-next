@@ -1,16 +1,19 @@
 import React from 'react';
 
+import A from './generic/A';
+import Div from './generic/Div';
+import Ul from './generic/Ul';
+
 function Gist({ data }) {
     return (
-        <div>
-            <ul>
-                Files:{' '}
+        <Div border="1px solid #fff" borderRadius={10} m={10} p={10}>
+            <Ul>
                 {Object.keys(data.files).map(fileName => (
                     <li key={fileName}>{fileName}</li>
                 ))}
-            </ul>
-            <a href={data.url}>Gist Link</a>
-        </div>
+            </Ul>
+            <A href={data.html_url}>Gist Link</A>
+        </Div>
     );
 }
 

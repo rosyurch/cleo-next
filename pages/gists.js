@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import Nav from '../components/Nav/Nav';
 import Gist from '../components/Gist';
+import Input from '../components/generic/Input';
+import Form from '../components/generic/Form';
+import Ul from '../components/generic/Ul';
 
 function Gists({ userName, userGists, setGists }) {
     const [query, setQuery] = useState('');
@@ -14,11 +17,15 @@ function Gists({ userName, userGists, setGists }) {
     return (
         <>
             <Nav />
-            <ul>
-                <input type="text" aria-label="search" onChange={e => setQuery(e.target.value.toLowerCase())} />
+
+            <Form textAlign="center">
+                <Input type="text" aria-label="search" mb={0} onChange={e => setQuery(e.target.value.toLowerCase())} />
+            </Form>
+
+            <Ul display="flex" flexWrap="wrap">
                 {userGists
                     .filter(g => {
-                        // show  gist if one  of its file contains query term
+                        // show  gist if one  of its files contains query term
                         return Object.keys(g.files).some(fileName => fileName.toLowerCase().includes(query));
                     })
                     .map(g => (
@@ -26,7 +33,7 @@ function Gists({ userName, userGists, setGists }) {
                             <Gist data={g} />
                         </li>
                     ))}
-            </ul>
+            </Ul>
         </>
     );
 }

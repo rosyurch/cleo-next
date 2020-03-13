@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import Profile from '../components/Profile';
 import Nav from '../components/Nav/Nav';
-import Form from '../components/Form';
-import Input from '../components/Input';
-import Button from '../components/Button';
+import Form from '../components/generic/Form';
+import Input from '../components/generic/Input';
+import Button from '../components/generic/Button';
 
 let defaultProfile = '';
 if (typeof window !== 'undefined') {
@@ -35,12 +35,14 @@ function Index({ setProfile, userProfile }) {
     return (
         <>
             <Nav />
+
             <Form>
-                <Input border="none" p={10} type="text" value={name} onChange={e => setName(e.target.value)} />
+                <Input type="text" value={name} onChange={e => setName(e.target.value)} />
                 <Button border="none" borderLeft="1px solid #000" p={10} onClick={handleSubmit}>
                     Get
                 </Button>
             </Form>
+
             {userProfile.id && <Profile data={userProfile} />}
         </>
     );
