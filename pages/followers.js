@@ -1,47 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import Nav from '../components/Nav/Nav'
+import Follower from '../components/Follower'
+import Input from '../components/generic/Input'
+import Ul from '../components/generic/Ul'
+import Div from '../components/generic/Div'
 
-import Nav from '../components/Nav/Nav';
-import Follower from '../components/Follower';
-import Form from '../components/generic/Form';
-import Input from '../components/generic/Input';
-import Ul from '../components/generic/Ul';
+const Followers = ({
+  userName,
+  userFollowers,
+  setFollowers,
+  defaultProfile,
+}) => {
+  const [query, setQuery] = useState('')
 
-function Followers({ userName, userFollowers, setFollowers }) {
-    const [query, setQuery] = useState('');
+  useEffect(() => {
+    if (!userFollowers.length && userName) {
+      setFollowers(userName)
+    } else if (defaultProfile) {
+      setFollowers(defaultProfile)
+    }
+  }, []) // DON"T FORGET THAT [] !!!!!
 
-    useEffect(() => {
-        if (!userFollowers.length && userName) setFollowers(userName);
-    }, []); // DON"T FORGET THAT [] !!!!!
-
-    return (
+  return (
+    <>
+      {userFollowers.length ? (
         <>
-            <Nav />
-
-            <Form>
-                <Input type="text" aria-label="search" onChange={e => setQuery(e.target.value.toLowerCase())} />
-            </Form>
-
-            <Ul display="flex" flexWrap="wrap">
-                {userFollowers
-                    .filter(f => f.login.toLowerCase().includes(query))
-                    .map(f => (
-                        <li key={f.id}>
-                            <Follower data={f} />
-                        </li>
-                    ))}
-            </Ul>
+          <Nav />
+          <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
+            <Input
+              type="text"
+              aria-label="search"
+              onChange={e => setQuery(e.target.value.toLowerCase())}
+            />
+          </Div>
         </>
-    );
+      ) : (
+        <Nav showHomeOnly={true} />
+      )}
+
+      <Ul display="flex" flexWrap="wrap">
+        {userFollowers
+          .filter(f => f.login.toLowerCase().includes(query))
+          .map(f => (
+            <li key={f.id}>
+              <Follower data={f} />
+            </li>
+          ))}
+      </Ul>
+    </>
+  )
 }
 
 const mapStateToProps = state => ({
-    userName: state.userProfile.login,
-    userFollowers: state.userFollowers,
-});
+  userName: state.userProfile.login,
+  userFollowers: state.userFollowers,
+})
 
 const mapDispatchToProps = dispatch => ({
-    setFollowers: user => dispatch.userFollowers.getFollowers(user),
-});
+  setFollowers: dispatch.userFollowers.getFollowers,
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Followers);
+export default connect(mapStateToProps, mapDispatchToProps)(Followers)

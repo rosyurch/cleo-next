@@ -1,30 +1,43 @@
-import React from 'react';
+import React from 'react'
+import Flex from './generic/Flex'
+import Div from './generic/Div'
+import A from './generic/A'
 
-import Flex from './generic/Flex';
-import Div from './generic/Div';
-import A from './generic/A';
+const Profile = ({ data }) => {
+  const {
+    avatar_url,
+    name,
+    login,
+    location,
+    bio,
+    email,
+    followers,
+    following,
+    public_repos,
+    public_gists,
+    html_url,
+  } = data
 
-function Profile({ data }) {
-    return (
-        <Flex flexWrap="wrap" justifyContent="center">
-            <img src={data.avatar_url} width="200" height="200" />
-            <Div maxWidth={400} pl={20}>
-                <h1>{data.name}</h1>
-                <div>Login: {data.login}</div>
-                {data.location && <div>Location: {data.location}</div>}
-                {data.bio && <div>Bio: {data.bio}</div>}
-                {data.email && <div>Message: {data.email}</div>}
+  return (
+    <Flex flexWrap="wrap" justifyContent="center">
+      <img src={avatar_url} width="200" height="200" />
+      <Div maxWidth={400} pl={20}>
+        <h1>{name}</h1>
+        <div>Login: {login}</div>
+        {location && <div>Location: {location}</div>}
+        {bio && <div>Bio: {bio}</div>}
+        {email && <div>Message: {email}</div>}
 
-                {data.followers ? <div>Followers: {data.followers}</div> : ''}
-                {/* `0 && smth` is rendered by react */}
-                {data.following ? <div>Following: {data.following}</div> : ''}
+        {followers ? <div>Followers: {followers}</div> : ''}
+        {/* `0 && smth` is rendered by react */}
+        {following ? <div>Following: {following}</div> : ''}
 
-                {data.public_repos ? <div>Repos: {data.public_repos}</div> : ''}
-                {data.public_gists ? <div>Gists: {data.public_gists}</div> : ''}
-                <A href={data.html_url}>Link</A>
-            </Div>
-        </Flex>
-    );
+        {public_repos ? <div>Repos: {public_repos}</div> : ''}
+        {public_gists ? <div>Gists: {public_gists}</div> : ''}
+        <A href={html_url}>Link</A>
+      </Div>
+    </Flex>
+  )
 }
 
-export default Profile;
+export default Profile

@@ -4,4 +4,4 @@ export const theme = {
         bg: '#333',
         link: '#8cf',
     },
-};
+}

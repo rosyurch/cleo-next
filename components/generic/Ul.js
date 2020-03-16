@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { space, layout, border, flexbox } from 'styled-system';
+import styled from 'styled-components'
+import { space, layout, border, flexbox } from 'styled-system'
 
 const Ul = styled.ul`
     list-style-type: none;
@@ -8,6 +8,6 @@ const Ul = styled.ul`
     ${layout};
     ${border};
     ${flexbox}
-`;
+`
 
-export default Ul;
+export default Ul

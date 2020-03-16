@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { space, border, layout } from 'styled-system';
+import styled from 'styled-components'
+import { space, border, layout } from 'styled-system'
 
 const Input = styled.input`
     border: none;
@@ -8,6 +8,6 @@ const Input = styled.input`
     ${space};
     ${border};
     ${layout};
-`;
+`
 
-export default Input;
+export default Input

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { space, border } from 'styled-system';
+import styled from 'styled-components'
+import { space, border } from 'styled-system'
 
 const Button = styled.button`
     color: ${({ theme }) => theme.colors.bg};
@@ -12,6 +12,6 @@ const Button = styled.button`
         color: ${({ theme }) => theme.colors.primary};
         background-color: ${({ theme }) => theme.colors.bg};
     }
-`;
+`
 
-export default Button;
+export default Button

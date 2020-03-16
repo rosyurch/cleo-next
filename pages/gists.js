@@ -1,50 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import Nav from '../components/Nav/Nav'
+import Gist from '../components/Gist'
+import Input from '../components/generic/Input'
+import Div from '../components/generic/Div'
+import Ul from '../components/generic/Ul'
 
-import Nav from '../components/Nav/Nav';
-import Gist from '../components/Gist';
-import Input from '../components/generic/Input';
-import Form from '../components/generic/Form';
-import Ul from '../components/generic/Ul';
+const Gists = ({ userName, userGists, setGists, defaultProfile }) => {
+  const [query, setQuery] = useState('')
 
-function Gists({ userName, userGists, setGists }) {
-    const [query, setQuery] = useState('');
+  useEffect(() => {
+    if (!userGists.length && userName) {
+      setGists(userName)
+    } else if (defaultProfile) {
+      setGists(defaultProfile)
+    }
+  }, [])
 
-    useEffect(() => {
-        if (!userGists.length && userName) setGists(userName);
-    }, []);
-
-    return (
+  return (
+    <>
+      {userGists.length ? (
         <>
-            <Nav />
-
-            <Form textAlign="center">
-                <Input type="text" aria-label="search" mb={0} onChange={e => setQuery(e.target.value.toLowerCase())} />
-            </Form>
-
-            <Ul display="flex" flexWrap="wrap">
-                {userGists
-                    .filter(g => {
-                        // show  gist if one  of its files contains query term
-                        return Object.keys(g.files).some(fileName => fileName.toLowerCase().includes(query));
-                    })
-                    .map(g => (
-                        <li key={g.id}>
-                            <Gist data={g} />
-                        </li>
-                    ))}
-            </Ul>
+          <Nav />
+          <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
+            <Input
+              type="text"
+              aria-label="search"
+              mb={0}
+              onChange={e => setQuery(e.target.value.toLowerCase())}
+            />
+          </Div>
         </>
-    );
+      ) : (
+        <Nav showHomeOnly={true} />
+      )}
+
+      <Ul display="flex" flexWrap="wrap">
+        {userGists
+          .filter(g =>
+            Object.keys(g.files).some(fileName =>
+              fileName.toLowerCase().includes(query)
+            )
+          )
+          .map(g => (
+            <li key={g.id}>
+              <Gist data={g} />
+            </li>
+          ))}
+      </Ul>
+    </>
+  )
 }
 
 const mapStateToProps = state => ({
-    userName: state.userProfile.login,
-    userGists: state.userGists,
-});
+  userName: state.userProfile.login,
+  userGists: state.userGists,
+})
 
 const mapDispatchToProps = dispatch => ({
-    setGists: user => dispatch.userGists.getGists(user),
-});
+  setGists: dispatch.userGists.getGists,
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Gists);
+export default connect(mapStateToProps, mapDispatchToProps)(Gists)

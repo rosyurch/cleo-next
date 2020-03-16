@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Nav = styled.nav`
     display: flex;
@@ -8,6 +8,6 @@ const Nav = styled.nav`
     border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.primary};
     background-color: ${({ theme }) => theme.colors.bg};
-`;
+`
 
-export default Nav;
+export default Nav

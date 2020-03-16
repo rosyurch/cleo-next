@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { typography } from 'styled-system';
+import styled from 'styled-components'
+import { typography } from 'styled-system'
 
 const Form = styled.form`
     padding: 20px;
@@ -9,6 +9,6 @@ const Form = styled.form`
     border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
     margin-bottom: 15px;
     ${typography};
-`;
+`
 
-export default Form;
+export default Form
