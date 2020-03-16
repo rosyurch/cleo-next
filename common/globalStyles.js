@@ -9,4 +9,5 @@ const GlobalStyle = createGlobalStyle`
         background-color:${({ theme }) => theme.colors.bg};
     }
 `
+
 export default GlobalStyle

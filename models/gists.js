@@ -5,7 +5,7 @@ export const userGists = {
   },
 
   effects: dispatch => ({
-    async getGists(payload, rootState) {
+    async getGists(payload) {
       dispatch.isLoading.setIsLoading(true)
       const responce = await fetch(
         `https://api.github.com/users/${payload}/gists`
