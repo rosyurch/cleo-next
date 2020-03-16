@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Profile from '../components/Profile'
-import Nav from '../components/Nav/Nav'
-import Form from '../components/generic/Form'
-import Input from '../components/generic/Input'
-import Button from '../components/generic/Button'
+import Profile from 'components/Profile'
+import Nav from 'components/Nav/Nav'
+import Form from 'generic/Form'
+import Input from 'generic/Input'
+import Button from 'generic/Button'
+import Loading from 'components/Loading'
 
-function Index({ setProfile, userProfile, defaultProfile }) {
+function Index({ setProfile, userProfile, defaultProfile, isLoading }) {
   const [name, setName] = useState('')
   const [searchName, setSearchName] = useState(
     userProfile.login || defaultProfile
@@ -41,6 +42,8 @@ function Index({ setProfile, userProfile, defaultProfile }) {
         </Button>
       </Form>
 
+      {isLoading && !userProfile.id && <Loading>Loading...</Loading>}
+
       {userProfile.id && <Profile data={userProfile} />}
     </>
   )
@@ -48,6 +51,7 @@ function Index({ setProfile, userProfile, defaultProfile }) {
 
 const mapStateToProps = state => ({
   userProfile: state.userProfile,
+  isLoading: state.isLoading,
 })
 
 const mapDispatchToProps = dispatch => ({

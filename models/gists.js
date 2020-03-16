@@ -5,11 +5,13 @@ export const userGists = {
   },
 
   effects: dispatch => ({
-    async getGists(payload) {
+    async getGists(payload, rootState) {
+      dispatch.isLoading.setIsLoading(true)
       const responce = await fetch(
         `https://api.github.com/users/${payload}/gists`
       )
       const data = await responce.json()
+      dispatch.isLoading.setIsLoading(false)
       dispatch.userGists.setGists(data)
     },
   }),

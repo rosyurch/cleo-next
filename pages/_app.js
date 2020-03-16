@@ -3,8 +3,8 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import store from '../store'
 import { Provider } from 'react-redux'
-import GlobalStyle from '../common/globalStyles'
-import { theme } from '../common/theme'
+import GlobalStyle from 'common/globalStyles'
+import { theme } from 'common/theme'
 
 let defaultProfile = ''
 if (typeof window !== 'undefined') {

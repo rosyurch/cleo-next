@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Nav from '../components/Nav/Nav'
-import Follower from '../components/Follower'
-import Input from '../components/generic/Input'
-import Ul from '../components/generic/Ul'
-import Div from '../components/generic/Div'
+import Nav from 'components/Nav/Nav'
+import Follower from 'components/Follower'
+import Input from 'generic/Input'
+import Ul from 'generic/Ul'
+import Div from 'generic/Div'
+import Loading from 'components/Loading'
 
 const Followers = ({
   userName,
   userFollowers,
   setFollowers,
   defaultProfile,
+  isLoading,
 }) => {
   const [query, setQuery] = useState('')
 
@@ -39,6 +41,8 @@ const Followers = ({
         <Nav showHomeOnly={true} />
       )}
 
+      {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
+
       <Ul display="flex" flexWrap="wrap">
         {userFollowers
           .filter(f => f.login.toLowerCase().includes(query))
@@ -55,6 +59,7 @@ const Followers = ({
 const mapStateToProps = state => ({
   userName: state.userProfile.login,
   userFollowers: state.userFollowers,
+  isLoading: state.isLoading,
 })
 
 const mapDispatchToProps = dispatch => ({

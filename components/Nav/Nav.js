@@ -1,16 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
 import Nav from './NavStyles'
-import A from '../generic/A'
+import A from 'generic/A'
 
 export default ({ showHomeOnly }) => (
   <Nav>
     <Link href="/">
       <A>Home</A>
     </Link>
-    {showHomeOnly ? (
-      ''
-    ) : (
+    {showHomeOnly ? null : (
       <>
         <Link href="/repos">
           <A>Repos</A>
