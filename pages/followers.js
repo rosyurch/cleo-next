@@ -24,6 +24,11 @@ const Followers = ({
     }
   }, []) // DON"T FORGET THAT [] !!!!!
 
+  const renderFollowers = (followersList, searchTerm) =>
+    searchTerm
+      ? followersList.filter(f => f.login.toLowerCase().includes(searchTerm))
+      : followersList
+
   return (
     <>
       {userFollowers.length ? (
@@ -44,13 +49,11 @@ const Followers = ({
       {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
 
       <Ul display="flex" flexWrap="wrap">
-        {userFollowers
-          .filter(f => f.login.toLowerCase().includes(query))
-          .map(f => (
-            <li key={f.id}>
-              <Follower data={f} />
-            </li>
-          ))}
+        {renderFollowers(userFollowers, query).map(f => (
+          <li key={f.id}>
+            <Follower data={f} />
+          </li>
+        ))}
       </Ul>
     </>
   )

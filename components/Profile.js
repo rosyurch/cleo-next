@@ -1,7 +1,8 @@
 import React from 'react'
-import Flex from './generic/Flex'
-import Div from './generic/Div'
-import A from './generic/A'
+import Flex from 'generic/Flex'
+import Div from 'generic/Div'
+import A from 'generic/A'
+import H1 from 'generic/H1'
 
 const Profile = ({ data }) => {
   const {
@@ -22,7 +23,7 @@ const Profile = ({ data }) => {
     <Flex flexWrap="wrap" justifyContent="center">
       <img src={avatar_url} width="200" height="200" />
       <Div maxWidth={400} pl={20}>
-        <h1>{name}</h1>
+        <H1 my={0}>{name}</H1>
         <div>Login: {login}</div>
         {location && <div>Location: {location}</div>}
         {bio && <div>Bio: {bio}</div>}

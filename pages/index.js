@@ -25,7 +25,7 @@ function Index({ setProfile, userProfile, defaultProfile, isLoading }) {
         localStorage.setItem('defaultProfile', searchName)
       }
     }
-  }, [searchName])
+  }, [searchName, setProfile])
 
   return (
     <>

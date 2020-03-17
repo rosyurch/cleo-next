@@ -32,17 +32,16 @@ const Repos = ({
     [userRepos]
   )
 
-  const searchHandler = e => {
-    setQuery(e.target.value.toLowerCase())
-    // const query = e.target.value.toLowerCase()
-    // const filtered = userRepos.filter(
-    //   r =>
-    //     r.name.toLowerCase().includes(query) ||
-    //     (r.description && r.description.toLowerCase().includes(query)) ||
-    //     (r.language && r.language.toLowerCase().includes(query))
-    // )
-    // setRepos(filtered)
-  }
+  const renderRepos = (reposList, searchTerm) =>
+    searchTerm
+      ? reposList.filter(
+          r =>
+            r.name.toLowerCase().includes(searchTerm) ||
+            (r.description &&
+              r.description.toLowerCase().includes(searchTerm)) ||
+            (r.language && r.language.toLowerCase().includes(searchTerm))
+        )
+      : reposList
 
   return (
     <>
@@ -55,7 +54,11 @@ const Repos = ({
             alignItems="center"
             borderBottom="1px solid #fff"
           >
-            <Input type="text" aria-label="search" onChange={searchHandler} />
+            <Input
+              type="text"
+              aria-label="search"
+              onChange={e => setQuery(e.target.value.toLowerCase())}
+            />
             <label>
               Sort by stars:
               <input type="checkbox" onChange={() => setSortByStars(s => !s)} />
@@ -71,20 +74,11 @@ const Repos = ({
       {isLoading && !userRepos.length && <Loading>Loading...</Loading>}
 
       <Ul display="flex" flexWrap="wrap">
-        {(sortByStars ? sortedList : userRepos)
-          .filter(r =>
-            query
-              ? r.name.toLowerCase().includes(query) ||
-                (r.description &&
-                  r.description.toLowerCase().includes(query)) ||
-                (r.language && r.language.toLowerCase().includes(query))
-              : r
-          )
-          .map(r => (
-            <li key={r.id}>
-              <Repo data={r} />
-            </li>
-          ))}
+        {renderRepos(sortByStars ? sortedList : userRepos, query).map(r => (
+          <li key={r.id}>
+            <Repo data={r} />
+          </li>
+        ))}
       </Ul>
     </>
   )
@@ -98,7 +92,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setUserRepos: dispatch.userRepos.getRepos, // api call
-  // setRepos: dispatch.userRepos.setRepos,
+  // setRepos: dispatch.userRepos.setRepos,  // regular reducer
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Repos)

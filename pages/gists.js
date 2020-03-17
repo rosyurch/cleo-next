@@ -24,6 +24,15 @@ const Gists = ({
     }
   }, [])
 
+  const renderGists = (gistList, searchTerm) =>
+    searchTerm
+      ? gistList.filter(g =>
+          Object.keys(g.files).some(fileName =>
+            fileName.toLowerCase().includes(searchTerm)
+          )
+        )
+      : gistList
+
   return (
     <>
       {userGists.length ? (
@@ -45,17 +54,11 @@ const Gists = ({
       {isLoading && !userGists.length && <Loading>Loading...</Loading>}
 
       <Ul display="flex" flexWrap="wrap">
-        {userGists
-          .filter(g =>
-            Object.keys(g.files).some(fileName =>
-              fileName.toLowerCase().includes(query)
-            )
-          )
-          .map(g => (
-            <li key={g.id}>
-              <Gist data={g} />
-            </li>
-          ))}
+        {renderGists(userGists, query).map(g => (
+          <li key={g.id}>
+            <Gist data={g} />
+          </li>
+        ))}
       </Ul>
     </>
   )
