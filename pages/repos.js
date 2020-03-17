@@ -25,8 +25,6 @@ const Repos = ({
     }
   }, [])
 
-  // test comm
-
   const sortedList = useMemo(
     () =>
       [...userRepos].sort((a, b) => b.stargazers_count - a.stargazers_count),
