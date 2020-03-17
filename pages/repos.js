@@ -13,7 +13,6 @@ const Repos = ({
   setUserRepos,
   defaultProfile,
   isLoading,
-  // setRepos
 }) => {
   const [sortByStars, setSortByStars] = useState(false)
   const [query, setQuery] = useState('')
@@ -92,7 +91,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setUserRepos: dispatch.userRepos.getRepos, // api call
-  // setRepos: dispatch.userRepos.setRepos,  // regular reducer
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Repos)
