@@ -19,10 +19,10 @@ const Gists = ({
   useEffect(() => {
     if (!userGists.length && userName) {
       setGists(userName)
-    } else if (defaultProfile) {
+    } else if (defaultProfile && !userGists.length) {
       setGists(defaultProfile)
     }
-  }, [setGists, userGists.length, userName, defaultProfile])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const renderGists = (gistList, searchTerm) =>
     searchTerm

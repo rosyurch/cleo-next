@@ -19,10 +19,10 @@ const Followers = ({
   useEffect(() => {
     if (!userFollowers.length && userName) {
       setFollowers(userName)
-    } else if (defaultProfile) {
+    } else if (defaultProfile && !userFollowers.length) {
       setFollowers(defaultProfile)
     }
-  }, [setFollowers, defaultProfile, userName, userFollowers.length])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const renderFollowers = (followersList, searchTerm) =>
     searchTerm
