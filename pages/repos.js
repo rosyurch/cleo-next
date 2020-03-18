@@ -20,10 +20,10 @@ const Repos = ({
   useEffect(() => {
     if (!userRepos.length && userName) {
       setUserRepos(userName)
-    } else if (defaultProfile) {
+    } else if (defaultProfile && !userRepos.length) {
       setUserRepos(defaultProfile)
     }
-  }, [defaultProfile, setUserRepos, userName, userRepos.length])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const sortedList = useMemo(
     () =>

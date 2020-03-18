@@ -25,7 +25,7 @@ function Index({ setProfile, userProfile, defaultProfile, isLoading }) {
         localStorage.setItem('defaultProfile', searchName)
       }
     }
-  }, [searchName, setProfile])
+  }, [searchName]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
