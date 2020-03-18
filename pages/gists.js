@@ -22,7 +22,7 @@ const Gists = ({
     } else if (defaultProfile) {
       setGists(defaultProfile)
     }
-  }, [])
+  }, [setGists, userGists.length, userName, defaultProfile])
 
   const renderGists = (gistList, searchTerm) =>
     searchTerm

@@ -23,7 +23,7 @@ const Repos = ({
     } else if (defaultProfile) {
       setUserRepos(defaultProfile)
     }
-  }, [])
+  }, [defaultProfile, setUserRepos, userName, userRepos.length])
 
   const sortedList = useMemo(
     () =>

@@ -22,7 +22,7 @@ const Followers = ({
     } else if (defaultProfile) {
       setFollowers(defaultProfile)
     }
-  }, []) // DON"T FORGET THAT [] !!!!!
+  }, [setFollowers, defaultProfile, userName, userFollowers.length])
 
   const renderFollowers = (followersList, searchTerm) =>
     searchTerm

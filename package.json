@@ -42,9 +42,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
+      "eslint --max-warnings=0 --fix",
+      "prettier --write"
     ]
   }
 }
