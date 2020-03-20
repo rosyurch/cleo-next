@@ -1,10 +1,9 @@
-import App from 'next/app'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import store from 'common/store'
 import { Provider } from 'react-redux'
 import GlobalStyle from 'common/globalStyles'
-import { theme } from 'common/theme'
+import { dark, light } from 'common/theme'
 import ErrorBoundary from 'components/ErrorBoundary'
 
 let defaultProfile = ''
@@ -13,18 +12,19 @@ if (typeof window !== 'undefined') {
   defaultProfile = localStorage.getItem('defaultProfile')
 }
 
-export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return (
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <ErrorBoundary>
-            <Component {...pageProps} defaultProfile={defaultProfile} />
-          </ErrorBoundary>
-        </ThemeProvider>
-      </Provider>
-    )
-  }
+const MyApp = ({ Component, pageProps }) => {
+  const theme = store.getState().darkTheme ? dark : light
+
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <ErrorBoundary>
+          <Component {...pageProps} defaultProfile={defaultProfile} />
+        </ErrorBoundary>
+      </ThemeProvider>
+    </Provider>
+  )
 }
+
+export default MyApp
