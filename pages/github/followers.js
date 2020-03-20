@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Nav from 'components/Nav/Nav'
 import Follower from 'components/Follower'
 import Input from 'generic/Input'
 import Ul from 'generic/Ul'
 import Div from 'generic/Div'
 import Loading from 'components/Loading'
+import Sidebar from 'components/Sidebar'
+import Flex from 'generic/Flex'
 
 const Followers = ({
   userName,
@@ -13,6 +14,8 @@ const Followers = ({
   setFollowers,
   defaultProfile,
   isLoading,
+  setProfile,
+  userProfile,
 }) => {
   const [query, setQuery] = useState('')
 
@@ -24,16 +27,27 @@ const Followers = ({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // get profile data
+  useEffect(() => {
+    if (!userName) {
+      setProfile(defaultProfile)
+      // if (!localStorage.getItem('defaultProfile')) {
+      //   localStorage.setItem('defaultProfile', userName)
+      // }
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
   const renderFollowers = (followersList, searchTerm) =>
     searchTerm
       ? followersList.filter(f => f.login.toLowerCase().includes(searchTerm))
       : followersList
 
   return (
-    <>
-      {userFollowers.length ? (
-        <>
-          <Nav />
+    <Flex>
+      <Sidebar userProfile={userProfile} />
+
+      <Div width="100%">
+        {userFollowers.length ? (
           <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
             <Input
               type="text"
@@ -41,21 +55,19 @@ const Followers = ({
               onChange={e => setQuery(e.target.value.toLowerCase())}
             />
           </Div>
-        </>
-      ) : (
-        <Nav showHomeOnly={true} />
-      )}
+        ) : null}
 
-      {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
+        {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
 
-      <Ul display="flex" flexWrap="wrap">
-        {renderFollowers(userFollowers, query).map(f => (
-          <li key={f.id}>
-            <Follower data={f} />
-          </li>
-        ))}
-      </Ul>
-    </>
+        <Ul display="flex" flexWrap="wrap">
+          {renderFollowers(userFollowers, query).map(f => (
+            <li key={f.id}>
+              <Follower data={f} />
+            </li>
+          ))}
+        </Ul>
+      </Div>
+    </Flex>
   )
 }
 
@@ -63,10 +75,12 @@ const mapStateToProps = state => ({
   userName: state.userProfile.login,
   userFollowers: state.userFollowers,
   isLoading: state.isLoading,
+  userProfile: state.userProfile,
 })
 
 const mapDispatchToProps = dispatch => ({
   setFollowers: dispatch.userFollowers.getFollowers,
+  setProfile: dispatch.userProfile.getProfile,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Followers)

@@ -1,7 +1,7 @@
 import App from 'next/app'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import store from '../store'
+import store from 'common/store'
 import { Provider } from 'react-redux'
 import GlobalStyle from 'common/globalStyles'
 import { theme } from 'common/theme'

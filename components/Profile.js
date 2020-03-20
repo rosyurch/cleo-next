@@ -1,5 +1,4 @@
 import React from 'react'
-import Flex from 'generic/Flex'
 import Div from 'generic/Div'
 import A from 'generic/A'
 import H1 from 'generic/H1'
@@ -20,9 +19,9 @@ const Profile = ({ data }) => {
   } = data
 
   return (
-    <Flex flexWrap="wrap" justifyContent="center">
+    <Div ml={10} mt={10} width={200} textAlign="center">
       <img src={avatar_url} width="200" height="200" />
-      <Div maxWidth={400} pl={20}>
+      <Div width={200} textAlign="start">
         <H1 my={0}>{name}</H1>
         <div>Login: {login}</div>
         {location && <div>Location: {location}</div>}
@@ -37,7 +36,7 @@ const Profile = ({ data }) => {
         {public_gists ? <div>Gists: {public_gists}</div> : ''}
         <A href={html_url}>Link</A>
       </Div>
-    </Flex>
+    </Div>
   )
 }
 
