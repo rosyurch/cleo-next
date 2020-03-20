@@ -30,6 +30,9 @@ const Index = ({ setProfile, userProfile, defaultProfile, isLoading }) => {
 
   const userNotFound = userProfile.message === 'Not Found'
 
+  // const x = 5
+  // x = 3 // triggers error
+
   return (
     <Flex>
       <Sidebar userProfile={userProfile} />

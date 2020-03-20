@@ -5,6 +5,7 @@ import store from 'common/store'
 import { Provider } from 'react-redux'
 import GlobalStyle from 'common/globalStyles'
 import { theme } from 'common/theme'
+import ErrorBoundary from 'components/ErrorBoundary'
 
 let defaultProfile = ''
 if (typeof window !== 'undefined') {
@@ -19,7 +20,9 @@ export default class MyApp extends App {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <Component {...pageProps} defaultProfile={defaultProfile} />
+          <ErrorBoundary>
+            <Component {...pageProps} defaultProfile={defaultProfile} />
+          </ErrorBoundary>
         </ThemeProvider>
       </Provider>
     )
