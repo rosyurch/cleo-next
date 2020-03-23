@@ -37,10 +37,11 @@ const Followers = ({
       : followersList
 
   return (
-    <Div width="100%">
+    <Div width="70%" mx="auto">
       {userFollowers.length ? (
         <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
           <Input
+            width="auto"
             type="text"
             aria-label="search"
             onChange={e => setQuery(e.target.value.toLowerCase())}

@@ -52,7 +52,7 @@ const Repos = ({
       : reposList
 
   return (
-    <Div width="70%" mx="auto">
+    <Div>
       {userRepos.length ? (
         <Flex
           py={20}
