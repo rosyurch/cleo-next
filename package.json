@@ -41,12 +41,7 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "!(docs)/**/*.js": [
-        "npm run lint:server --"
-      ]
-    },
-    "*.js": [
+    "*.js, !(./docs/**/*.js)": [
       "eslint --max-warnings=0 --fix",
       "prettier --write"
     ]
