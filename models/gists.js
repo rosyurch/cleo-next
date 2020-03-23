@@ -2,6 +2,7 @@ export const userGists = {
   state: [],
   reducers: {
     setGists: (state, payload) => payload,
+    clearGists: () => [],
   },
 
   effects: dispatch => ({

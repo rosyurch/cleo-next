@@ -2,6 +2,7 @@ export const userFollowers = {
   state: [],
   reducers: {
     setFollowers: (state, payload) => payload,
+    clearFollowers: () => [],
   },
 
   effects: dispatch => ({

@@ -4,7 +4,7 @@ import Nav from './Nav/Nav'
 import Profile from './Profile'
 import Div from 'generic/Div'
 
-const Sidebar = ({ userProfile, setDarkTheme, darkTheme }) => (
+const Sidebar = ({ userProfile, handleTheme, theme }) => (
   <Div
     borderRight="1px solid #fff"
     borderBottom="1px solid #fff"
@@ -13,18 +13,14 @@ const Sidebar = ({ userProfile, setDarkTheme, darkTheme }) => (
     pr={10}
     pb={10}
   >
-    <button onClick={setDarkTheme}>{darkTheme ? 'Light' : 'Dark'}</button>
+    <button onClick={() => handleTheme()}>{theme ? 'light' : 'dark'}</button>
     <Nav />
     {userProfile.id && <Profile data={userProfile} />}
   </Div>
 )
 
-const mapStateToProps = state => ({
-  darkTheme: state.darkTheme,
+const mapState = state => ({
+  userProfile: state.userProfile,
 })
 
-const mapDispatchToProps = dispatch => ({
-  setDarkTheme: dispatch.darkTheme.setDarkTheme,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+export default connect(mapState)(Sidebar)

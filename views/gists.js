@@ -5,12 +5,9 @@ import Input from 'generic/Input'
 import Div from 'generic/Div'
 import Ul from 'generic/Ul'
 import Loading from 'components/Loading'
-import Flex from 'generic/Flex'
-import Sidebar from 'components/Sidebar'
 
 const Gists = ({
   userName,
-  userProfile,
   userGists,
   setGists,
   defaultProfile,
@@ -31,9 +28,6 @@ const Gists = ({
   useEffect(() => {
     if (!userName) {
       setProfile(defaultProfile)
-      // if (!localStorage.getItem('defaultProfile')) {
-      //   localStorage.setItem('defaultProfile', userName)
-      // }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -47,31 +41,28 @@ const Gists = ({
       : gistList
 
   return (
-    <Flex>
-      <Sidebar userProfile={userProfile} />
-      <Div width="100%">
-        {userGists.length ? (
-          <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
-            <Input
-              type="text"
-              aria-label="search"
-              mb={0}
-              onChange={e => setQuery(e.target.value.toLowerCase())}
-            />
-          </Div>
-        ) : null}
+    <Div width="100%">
+      {userGists.length ? (
+        <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
+          <Input
+            type="text"
+            aria-label="search"
+            mb={0}
+            onChange={e => setQuery(e.target.value.toLowerCase())}
+          />
+        </Div>
+      ) : null}
 
-        {isLoading && !userGists.length && <Loading>Loading...</Loading>}
+      {isLoading && !userGists.length && <Loading>Loading...</Loading>}
 
-        <Ul display="flex" flexWrap="wrap">
-          {renderGists(userGists, query).map(g => (
-            <li key={g.id}>
-              <Gist data={g} />
-            </li>
-          ))}
-        </Ul>
-      </Div>
-    </Flex>
+      <Ul display="flex" flexWrap="wrap">
+        {renderGists(userGists, query).map(g => (
+          <li key={g.id}>
+            <Gist data={g} />
+          </li>
+        ))}
+      </Ul>
+    </Div>
   )
 }
 

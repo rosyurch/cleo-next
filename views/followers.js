@@ -5,8 +5,6 @@ import Input from 'generic/Input'
 import Ul from 'generic/Ul'
 import Div from 'generic/Div'
 import Loading from 'components/Loading'
-import Sidebar from 'components/Sidebar'
-import Flex from 'generic/Flex'
 
 const Followers = ({
   userName,
@@ -15,7 +13,6 @@ const Followers = ({
   defaultProfile,
   isLoading,
   setProfile,
-  userProfile,
 }) => {
   const [query, setQuery] = useState('')
 
@@ -31,9 +28,6 @@ const Followers = ({
   useEffect(() => {
     if (!userName) {
       setProfile(defaultProfile)
-      // if (!localStorage.getItem('defaultProfile')) {
-      //   localStorage.setItem('defaultProfile', userName)
-      // }
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -43,31 +37,27 @@ const Followers = ({
       : followersList
 
   return (
-    <Flex>
-      <Sidebar userProfile={userProfile} />
+    <Div width="100%">
+      {userFollowers.length ? (
+        <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
+          <Input
+            type="text"
+            aria-label="search"
+            onChange={e => setQuery(e.target.value.toLowerCase())}
+          />
+        </Div>
+      ) : null}
 
-      <Div width="100%">
-        {userFollowers.length ? (
-          <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
-            <Input
-              type="text"
-              aria-label="search"
-              onChange={e => setQuery(e.target.value.toLowerCase())}
-            />
-          </Div>
-        ) : null}
+      {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
 
-        {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
-
-        <Ul display="flex" flexWrap="wrap">
-          {renderFollowers(userFollowers, query).map(f => (
-            <li key={f.id}>
-              <Follower data={f} />
-            </li>
-          ))}
-        </Ul>
-      </Div>
-    </Flex>
+      <Ul display="flex" flexWrap="wrap">
+        {renderFollowers(userFollowers, query).map(f => (
+          <li key={f.id}>
+            <Follower data={f} />
+          </li>
+        ))}
+      </Ul>
+    </Div>
   )
 }
 
