@@ -10,13 +10,13 @@ export default ({ showHomeOnly }) => (
     </Link>
     {showHomeOnly ? null : (
       <>
-        <Link href="/repos">
+        <Link href="/github/repos">
           <A>Repos</A>
         </Link>
-        <Link href="/followers">
+        <Link href="/github/followers">
           <A>Followers</A>
         </Link>
-        <Link href="/gists">
+        <Link href="/github/gists">
           <A>Gists</A>
         </Link>
       </>

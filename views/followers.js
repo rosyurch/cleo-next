@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Nav from 'components/Nav/Nav'
 import Follower from 'components/Follower'
 import Input from 'generic/Input'
 import Ul from 'generic/Ul'
@@ -13,6 +12,7 @@ const Followers = ({
   setFollowers,
   defaultProfile,
   isLoading,
+  setProfile,
 }) => {
   const [query, setQuery] = useState('')
 
@@ -24,27 +24,29 @@ const Followers = ({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // get profile data
+  useEffect(() => {
+    if (!userName) {
+      setProfile(defaultProfile)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
   const renderFollowers = (followersList, searchTerm) =>
     searchTerm
       ? followersList.filter(f => f.login.toLowerCase().includes(searchTerm))
       : followersList
 
   return (
-    <>
+    <Div width="100%">
       {userFollowers.length ? (
-        <>
-          <Nav />
-          <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
-            <Input
-              type="text"
-              aria-label="search"
-              onChange={e => setQuery(e.target.value.toLowerCase())}
-            />
-          </Div>
-        </>
-      ) : (
-        <Nav showHomeOnly={true} />
-      )}
+        <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
+          <Input
+            type="text"
+            aria-label="search"
+            onChange={e => setQuery(e.target.value.toLowerCase())}
+          />
+        </Div>
+      ) : null}
 
       {isLoading && !userFollowers.length && <Loading>Loading...</Loading>}
 
@@ -55,7 +57,7 @@ const Followers = ({
           </li>
         ))}
       </Ul>
-    </>
+    </Div>
   )
 }
 
@@ -63,10 +65,12 @@ const mapStateToProps = state => ({
   userName: state.userProfile.login,
   userFollowers: state.userFollowers,
   isLoading: state.isLoading,
+  userProfile: state.userProfile,
 })
 
 const mapDispatchToProps = dispatch => ({
   setFollowers: dispatch.userFollowers.getFollowers,
+  setProfile: dispatch.userProfile.getProfile,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Followers)

@@ -2,6 +2,7 @@ export const userRepos = {
   state: [],
   reducers: {
     setRepos: (state, payload) => payload,
+    clearRepos: () => [],
   },
 
   effects: dispatch => ({

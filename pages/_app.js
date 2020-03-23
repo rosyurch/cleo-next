@@ -1,10 +1,12 @@
-import App from 'next/app'
-import React from 'react'
+import React, { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
-import store from '../store'
+import store from 'common/store'
 import { Provider } from 'react-redux'
 import GlobalStyle from 'common/globalStyles'
-import { theme } from 'common/theme'
+import { dark, light } from 'common/theme'
+import ErrorBoundary from 'components/ErrorBoundary'
+import Sidebar from 'components/Sidebar'
+import Flex from 'generic/Flex'
 
 let defaultProfile = ''
 if (typeof window !== 'undefined') {
@@ -12,16 +14,27 @@ if (typeof window !== 'undefined') {
   defaultProfile = localStorage.getItem('defaultProfile')
 }
 
-export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return (
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Component {...pageProps} defaultProfile={defaultProfile} />
-        </ThemeProvider>
-      </Provider>
-    )
+const MyApp = ({ Component, pageProps }) => {
+  const [theme, setTheme] = useState(true)
+  // const theme = store.getState().darkTheme ? dark : light
+
+  const handleTheme = () => {
+    setTheme(s => !s)
   }
+
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme ? dark : light}>
+        <GlobalStyle />
+        <ErrorBoundary>
+          <Flex>
+            <Sidebar handleTheme={handleTheme} theme={theme} />
+            <Component {...pageProps} defaultProfile={defaultProfile} />
+          </Flex>
+        </ErrorBoundary>
+      </ThemeProvider>
+    </Provider>
+  )
 }
+
+export default MyApp

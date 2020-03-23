@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Nav from 'components/Nav/Nav'
 import Gist from 'components/Gist'
 import Input from 'generic/Input'
 import Div from 'generic/Div'
@@ -13,6 +12,7 @@ const Gists = ({
   setGists,
   defaultProfile,
   isLoading,
+  setProfile,
 }) => {
   const [query, setQuery] = useState('')
 
@@ -21,6 +21,13 @@ const Gists = ({
       setGists(userName)
     } else if (defaultProfile && !userGists.length) {
       setGists(defaultProfile)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // get profile data
+  useEffect(() => {
+    if (!userName) {
+      setProfile(defaultProfile)
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -34,22 +41,17 @@ const Gists = ({
       : gistList
 
   return (
-    <>
+    <Div width="100%">
       {userGists.length ? (
-        <>
-          <Nav />
-          <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
-            <Input
-              type="text"
-              aria-label="search"
-              mb={0}
-              onChange={e => setQuery(e.target.value.toLowerCase())}
-            />
-          </Div>
-        </>
-      ) : (
-        <Nav showHomeOnly={true} />
-      )}
+        <Div textAlign="center" borderBottom="1px solid #fff" py={20}>
+          <Input
+            type="text"
+            aria-label="search"
+            mb={0}
+            onChange={e => setQuery(e.target.value.toLowerCase())}
+          />
+        </Div>
+      ) : null}
 
       {isLoading && !userGists.length && <Loading>Loading...</Loading>}
 
@@ -60,18 +62,20 @@ const Gists = ({
           </li>
         ))}
       </Ul>
-    </>
+    </Div>
   )
 }
 
 const mapStateToProps = state => ({
   userName: state.userProfile.login,
+  userProfile: state.userProfile,
   userGists: state.userGists,
   isLoading: state.isLoading,
 })
 
 const mapDispatchToProps = dispatch => ({
   setGists: dispatch.userGists.getGists,
+  setProfile: dispatch.userProfile.getProfile,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gists)
