@@ -1,7 +1,7 @@
 import React from 'react'
-import A from './generic/A'
-import Div from './generic/Div'
-import Ul from './generic/Ul'
+import A from '../generic/A'
+import Div from '../generic/Div'
+import Ul from '../generic/Ul'
 
 const Gist = ({ data }) => {
   const { files, html_url } = data

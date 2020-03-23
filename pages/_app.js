@@ -7,16 +7,16 @@ import { dark, light } from 'common/theme'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Sidebar from 'components/Sidebar'
 import Flex from 'generic/Flex'
+import Footer from 'components/Footer'
 
 let defaultProfile = ''
 if (typeof window !== 'undefined') {
   // no 'window' on server
-  defaultProfile = localStorage.getItem('defaultProfile')
+  defaultProfile = localStorage.getItem('defaultProfile') || 'gaearon'
 }
 
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState(true)
-  // const theme = store.getState().darkTheme ? dark : light
 
   const handleTheme = () => {
     setTheme(s => !s)
@@ -31,6 +31,7 @@ const MyApp = ({ Component, pageProps }) => {
             <Sidebar handleTheme={handleTheme} theme={theme} />
             <Component {...pageProps} defaultProfile={defaultProfile} />
           </Flex>
+          <Footer />
         </ErrorBoundary>
       </ThemeProvider>
     </Provider>

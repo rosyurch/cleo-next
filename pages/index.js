@@ -1,3 +1,3 @@
-import Index from 'views'
+import Index from 'views/Index'
 
 export default Index

@@ -1,3 +1,3 @@
-import Repos from 'views/repos'
+import Repos from 'views/Repos'
 
 export default Repos

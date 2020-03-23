@@ -1,6 +1,6 @@
 import React from 'react'
-import A from './generic/A'
-import Div from './generic/Div'
+import A from '../generic/A'
+import Div from '../generic/Div'
 
 const Follower = ({ data }) => {
   const { avatar_url, html_url, login } = data

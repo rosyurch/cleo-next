@@ -1,3 +1,3 @@
-import Followers from 'views/followers'
+import Followers from 'views/Followers'
 
 export default Followers

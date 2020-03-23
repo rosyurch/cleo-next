@@ -1,3 +1,3 @@
-import Gists from 'views/gists'
+import Gists from 'views/Gists'
 
 export default Gists

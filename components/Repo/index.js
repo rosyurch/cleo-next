@@ -1,6 +1,6 @@
 import React from 'react'
-import Div from './generic/Div'
-import A from './generic/A'
+import Div from '../generic/Div'
+import A from '../generic/A'
 
 const Repo = ({ data }) => {
   const { name, language, description, stargazers_count, html_url } = data

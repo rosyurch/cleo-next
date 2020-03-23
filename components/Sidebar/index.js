@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Nav from './Nav/Nav'
-import Profile from './Profile'
+import Nav from '../Nav'
+import Profile from '../Profile'
 import Div from 'generic/Div'
 
 const Sidebar = ({ userProfile, handleTheme, theme }) => (
