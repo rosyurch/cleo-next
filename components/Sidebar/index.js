@@ -2,18 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Nav from '../Nav'
 import Profile from '../Profile'
-import Div from 'generic/Div'
+import { Div, Button } from './styled'
 
 const Sidebar = ({ userProfile, handleTheme, theme }) => (
-  <Div
-    borderRight="1px solid #fff"
-    borderBottom="1px solid #fff"
-    width={220}
-    height="100%"
-    pr={10}
-    pb={10}
-  >
-    <button onClick={() => handleTheme()}>{theme ? 'light' : 'dark'}</button>
+  <Div>
+    <Button onClick={() => handleTheme()}>{theme ? 'light' : 'dark'}</Button>
     <Nav />
     {userProfile.id && <Profile data={userProfile} />}
   </Div>

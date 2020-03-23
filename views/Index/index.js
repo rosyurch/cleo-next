@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Form from 'generic/Form'
 import Input from 'generic/Input'
 import Button from 'generic/Button'
 import Loading from 'components/Loading'
 import Div from 'generic/Div'
+import { Wrap, Form } from './styled'
 
 const Index = ({
   setProfile,
@@ -38,7 +38,7 @@ const Index = ({
   const userNotFound = userProfile.message === 'Not Found'
 
   return (
-    <Div width="100%">
+    <Wrap>
       <Form onSubmit={handleSubmit}>
         <Input
           type="text"
@@ -57,7 +57,7 @@ const Index = ({
           Couldn&apos;t find anybody
         </Div>
       )}
-    </Div>
+    </Wrap>
   )
 }
 

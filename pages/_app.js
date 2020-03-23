@@ -27,7 +27,7 @@ const MyApp = ({ Component, pageProps }) => {
       <ThemeProvider theme={theme ? dark : light}>
         <GlobalStyle />
         <ErrorBoundary>
-          <Flex>
+          <Flex flexWrap="wrap">
             <Sidebar handleTheme={handleTheme} theme={theme} />
             <Component {...pageProps} defaultProfile={defaultProfile} />
           </Flex>

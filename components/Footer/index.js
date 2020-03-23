@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const F = styled.footer`
   position: absolute;
-  left: 50%;
+  left: calc(50% - 18px);
   bottom: 0;
   text-align: center;
   padding: 15px 0;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
 import Repo from 'components/Repo'
 import Input from 'generic/Input'
-import Ul from 'generic/Ul'
+import { Ul } from './styled'
 import Flex from 'generic/Flex'
 import Loading from 'components/Loading'
 import Div from 'generic/Div'
@@ -52,7 +52,7 @@ const Repos = ({
       : reposList
 
   return (
-    <Div width="100%">
+    <Div width="70%" mx="auto">
       {userRepos.length ? (
         <Flex
           py={20}
@@ -74,7 +74,7 @@ const Repos = ({
 
       {isLoading && !userRepos.length && <Loading>Loading...</Loading>}
 
-      <Ul display="flex" flexWrap="wrap">
+      <Ul>
         {renderRepos(sortByStars ? sortedList : userRepos, query).map(r => (
           <li key={r.id}>
             <Repo data={r} />

@@ -1,5 +1,5 @@
 import React from 'react'
-import Div from 'generic/Div'
+import Div from './styled'
 import A from 'generic/A'
 import H1 from 'generic/H1'
 
@@ -19,7 +19,7 @@ const Profile = ({ data }) => {
   } = data
 
   return (
-    <Div ml={10} mt={10} width={200} textAlign="center">
+    <Div>
       <img src={avatar_url} width="200" height="200" />
       <Div width={200} textAlign="start">
         <H1 my={0}>{name}</H1>

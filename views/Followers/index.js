@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Follower from 'components/Follower'
 import Input from 'generic/Input'
-import Ul from 'generic/Ul'
+import { Ul } from './styled'
 import Div from 'generic/Div'
 import Loading from 'components/Loading'
 
